@@ -3,7 +3,7 @@ package com.interview.youtubegraph;
 import java.util.*;
 
 class provinces {
-    // dfs traversal function
+    //
     private static void dfs(int node,
                             ArrayList<ArrayList<Integer>> adjLs ,
                             int vis[]) {
