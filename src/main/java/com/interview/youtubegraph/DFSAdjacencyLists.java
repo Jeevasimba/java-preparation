@@ -4,27 +4,33 @@ import java.util.*;
 
 class DFS {
 
-    public static void dfs(int node, boolean vis[], ArrayList<ArrayList<Integer>> adj, ArrayList<Integer> ls) {
-
-        //marking current node as visited
-        vis[node] = true;
-        ls.add(node);
-
-        //getting neighbour nodes
-        for(Integer it: adj.get(node)) {
-            if(vis[it] == false) {
-                dfs(it, vis, adj, ls);
-            }
-        }
-    }
     // Function to return a list containing the DFS traversal of the graph.
     public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
-        //boolean array to keep track of visited vertices
-        boolean vis[] = new boolean[V+1];
-        vis[0] = true;
-        ArrayList<Integer> ls = new ArrayList<>();
-        dfs(0, vis, adj, ls);
-        return ls;
+        // Code here
+
+        boolean[] visited = new boolean[V+1];
+
+        ArrayList<Integer> ans = new ArrayList<>();
+
+        visited[0] = true;
+
+        dfs(0,adj,ans,visited);
+
+      return ans;
+    }
+
+    public void dfs(int node , ArrayList<ArrayList<Integer>> adj ,ArrayList<Integer> ans, boolean[] visited){
+
+        visited[node] = true;
+
+        ans.add(node);
+
+        for (int i : adj.get(node) ) {
+            if(!visited[i]) {
+                dfs(i, adj, ans, visited);
+            }
+        }
+
     }
 
     public static void main(String args[]) {
@@ -45,8 +51,8 @@ class DFS {
         DFS sl = new DFS();
         ArrayList < Integer > ans = sl.dfsOfGraph(5, adj);
         int n = ans.size();
-        for(int i = 0;i<n;i++) {
-            System.out.print(ans.get(i)+" ");
+        for (Integer an : ans) {
+            System.out.print(an + " ");
         }
     }
 }
