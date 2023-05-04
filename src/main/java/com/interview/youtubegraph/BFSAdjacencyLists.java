@@ -2,7 +2,7 @@ package com.interview.youtubegraph;
 
 import java.util.*;
 class bfs {
-    // Function to return Breadth First Traversal of given graph.
+    
     public ArrayList<Integer> bfsOfGraph(int V,
                                          ArrayList<ArrayList<Integer>> adj) {
 
