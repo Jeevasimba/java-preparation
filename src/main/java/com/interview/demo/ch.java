@@ -2,90 +2,61 @@ package com.interview.demo;
 
 import java.util.*;
 
-class TreeNode {
-    int data;
-    TreeNode left, right;
-    TreeNode(int data) {
-        this.data = data;
-        left = null;
-        right = null;
-    }
-}
+class Solution
+{
+    private boolean dfs(int node, int col, int color[],
+                        ArrayList<ArrayList<Integer>>adj) {
 
-class TUF {
+        color[node] = col;
 
-    public static int findheight(TreeNode root){
-        if(root==null){
-            return 0;
-        }
-
-        int level = 0;
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-
-        while (!queue.isEmpty()){
-            int size = queue.size();
-
-            while (size-- >0){
-                TreeNode node = queue.poll();
-                if (node.left!=null){
-                    queue.add(node.left);
-                }
-                if(node.right!=null){
-                    queue.add(node.right);
-                }
-
+        // traverse adjacent nodes
+        for(int it : adj.get(node)) {
+            // if uncoloured
+            if(color[it] == -1) {
+                if(dfs(it, 1 - col, color, adj) == false) return false;
             }
-            level++;
-
-
-        }
-
-        return level;
-    }
-
-    private static int levelOrder( TreeNode root ){
-        if( root == null ){
-            return 0;
-        }
-
-        LinkedList<TreeNode> queue = new LinkedList<>();
-        queue.addLast(root);
-
-        int level = 0;
-
-        while( !queue.isEmpty() ){
-            int size = queue.size();
-
-            while( size-- > 0 ){
-                TreeNode remNode = queue.removeFirst();
-                if( remNode.left != null ){
-                    queue.addLast( remNode.left );
-                }
-                if( remNode.right != null ){
-                    queue.addLast( remNode.right );
-                }
+            // if previously coloured and have the same colour
+            else if(color[it] == col) {
+                return false;
             }
-
-            level++;
         }
 
-        return level;
+        return true;
+    }
+    public boolean isBipartite(int V, ArrayList<ArrayList<Integer>>adj)
+    {
+        int color[] = new int[V];
+        for(int i = 0;i<V;i++) color[i] = -1;
+
+        // for connected components
+        for(int i = 0;i<V;i++) {
+            if(color[i] == -1) {
+                if(dfs(i, 0, color, adj) == false) return false;
+            }
+        }
+        return true;
+    }
+    public static void main(String[] args)
+    {
+        // V = 4, E = 4
+        ArrayList < ArrayList < Integer >> adj = new ArrayList < > ();
+        for (int i = 0; i < 4; i++) {
+            adj.add(new ArrayList < > ());
+        }
+        adj.get(0).add(2);
+        adj.get(2).add(0);
+        adj.get(0).add(3);
+        adj.get(3).add(0);
+        adj.get(1).add(3);
+        adj.get(3).add(1);
+        adj.get(2).add(3);
+        adj.get(3).add(2);
+
+        Solution obj = new Solution();
+        boolean ans = obj.isBipartite(4, adj);
+        if(ans)
+            System.out.println("1");
+        else System.out.println("0");
     }
 
-    public static void main(String args[]) {
-
-        TreeNode root = new TreeNode(1);
-        root.left = new TreeNode(2);
-        root.right = new TreeNode(3);
-        root.left.left = new TreeNode(4);
-        root.left.right = new TreeNode(5);
-        root.left.right.left = new TreeNode(8);
-        root.right.left = new TreeNode(6);
-        root.right.right = new TreeNode(7);
-        root.right.right.left = new TreeNode(9);
-        root.right.right.right = new TreeNode(10);
-
-        System.out.println(findheight(root));
-    }
 }

@@ -6,7 +6,7 @@ class bfs {
     public ArrayList<Integer> bfsOfGraph(int V,ArrayList<ArrayList<Integer>> adj) {
 
         ArrayList < Integer > bfs = new ArrayList < > ();
-        boolean vis[] = new boolean[V];
+        boolean[] vis = new boolean[V];
         Queue < Integer > q = new LinkedList < > ();
 
         q.add(0);
@@ -20,7 +20,7 @@ class bfs {
             // If a adjacent has not been visited, then mark it
             // visited and enqueue it
             for (Integer it: adj.get(node)) {
-                if (vis[it] == false) {
+                if (!vis[it]) {
                     vis[it] = true;
                     q.add(it);
                 }
@@ -30,7 +30,7 @@ class bfs {
         return bfs;
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         ArrayList < ArrayList < Integer >> adj = new ArrayList < > ();
         for (int i = 0; i < 5; i++) {
@@ -48,8 +48,8 @@ class bfs {
         bfs sl = new bfs();
         ArrayList < Integer > ans = sl.bfsOfGraph(5, adj);
         int n = ans.size();
-        for(int i = 0;i<n;i++) {
-            System.out.print(ans.get(i)+" ");
+        for (Integer an : ans) {
+            System.out.print(an + " ");
         }
     }
 }
