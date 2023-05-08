@@ -1,19 +1,23 @@
 package com.interview.youtubetree;
 
-class Node{
-
-    int key;
-
-    Node left,right;
-
-    Node(int val){
-        key = val;
-        left =  right = null;
-    }
-
-}
 
 public class BST {
+
+
+
+
+    class Node{
+
+        int key;
+
+        Node left,right;
+
+        Node(int val){
+            key = val;
+            left =  right = null;
+        }
+
+    }
 
     Node root;
 

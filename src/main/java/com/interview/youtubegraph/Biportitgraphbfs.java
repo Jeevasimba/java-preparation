@@ -18,15 +18,15 @@ public class Biportitgraphbfs {
         for (int i = 0; i < V ; i++) {
 
             if(vis[i]==-1){
-                 if(bfs(V,adj,vis,i)){
-                     return true;
+                 if(!bfs(V, adj, vis, i)){
+                     return false;
                  }
             }
 
         }
 
         // Code here
-        return false;
+        return true;
     }
 
 
@@ -37,15 +37,15 @@ public class Biportitgraphbfs {
         vis[node] = 0;
 
         while (!q.isEmpty()){
-            Integer element = q.poll();
+            int element = q.poll();
 
             int preval = vis[element];
 
-            for (Integer item : adj.get(element)) {
+            for (int item : adj.get(element)) {
 
-                q.add(item);
 
                 if(vis[item]==-1){
+                    q.add(item);
                     if(preval==0){
                         vis[item] = 1;
                     }else {

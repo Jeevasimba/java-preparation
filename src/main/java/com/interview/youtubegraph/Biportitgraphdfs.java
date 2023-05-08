@@ -16,15 +16,15 @@ public class Biportitgraphdfs {
 
             if(vis[i]==-1){
                 vis[i] = 0;
-                if(dfs(adj,vis,i)){
-                    return true;
+                if(!dfs(adj,vis,i)){
+                    return false;
                 }
             }
 
         }
 
         // Code here
-        return false;
+        return true;
 
     }
 
@@ -35,11 +35,9 @@ public class Biportitgraphdfs {
         for (int item: adj.get(node)) {
 
             if(vis[item]==-1){
-                if(preval==0){
-                    vis[item] = 1;
-                }else {
-                    vis[item] = 0;
-                }
+
+                vis[item] = 1 - preval;
+
                 dfs(adj,vis,item);
             } else if (preval==vis[item]) {
                 return false;
@@ -54,23 +52,22 @@ public class Biportitgraphdfs {
     {
         // V = 4, E = 4
         ArrayList < ArrayList < Integer >> adj = new ArrayList < > ();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             adj.add(new ArrayList < > ());
         }
+
+        adj.get(4).add(4);
         adj.get(0).add(2);
-        adj.get(2).add(0);
-        adj.get(0).add(3);
-        adj.get(3).add(0);
+        adj.get(1).add(2);
         adj.get(1).add(3);
-        adj.get(3).add(1);
         adj.get(2).add(3);
-        adj.get(3).add(2);
 
         Biportitgraphdfs obj = new Biportitgraphdfs();
-        boolean ans = obj.isBipartite(4, adj);
+        boolean ans = obj.isBipartite(5, adj);
         if(ans)
             System.out.println("1");
-        else System.out.println("0");
+        else
+            System.out.println("0");
     }
 
 }
