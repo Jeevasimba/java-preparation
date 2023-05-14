@@ -29,6 +29,7 @@ public class MaxPQ {
     }
 
 
+    // for insertion use Bottom up approach
     public void insert(int val){
 
         if(n==heap.length-1){
